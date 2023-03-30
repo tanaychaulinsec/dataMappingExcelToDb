@@ -1,10 +1,9 @@
 package com.tanay.datamappingexceltodb.Utility;
 import com.tanay.datamappingexceltodb.Entity.EmployeeEntity;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -30,9 +29,9 @@ public class ExcelHelper {
         try {
 
 
-            Workbook wb = new HSSFWorkbook(is);
+            XSSFWorkbook workbook = new XSSFWorkbook(is);
 
-            Sheet sheet = wb.createSheet("data");
+            XSSFSheet sheet = workbook.getSheet("data");
 
             int rowNumber = 0;
 

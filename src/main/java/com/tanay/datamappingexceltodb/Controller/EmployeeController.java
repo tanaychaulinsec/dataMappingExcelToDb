@@ -3,6 +3,7 @@ package com.tanay.datamappingexceltodb.Controller;
 import com.tanay.datamappingexceltodb.Entity.EmployeeEntity;
 import com.tanay.datamappingexceltodb.Service.EmployeeService;
 import com.tanay.datamappingexceltodb.Utility.ExcelHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,8 @@ import java.util.*;
 @RestController
 @CrossOrigin("*")
 public class EmployeeController {
-
-
-    private final EmployeeService employeeService;
-
-   public  EmployeeController(){
-       employeeService = new EmployeeService();
-   }
+    @Autowired
+    private EmployeeService employeeService;
 
     @PostMapping("/employees/upload")
     public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) {
@@ -40,6 +36,11 @@ public class EmployeeController {
     @GetMapping("/employees")
     public List<EmployeeEntity> getEmployees() {
         return this.employeeService.getAllEmployees();
+    }
+
+    @GetMapping("/employees/id/{emp_id}")
+    public Optional<EmployeeEntity> getEmployee(@PathVariable int emp_id) {
+        return this.employeeService.getEmployeesById(emp_id);
     }
 
 }
